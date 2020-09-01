@@ -1,0 +1,53 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table mb-0"
+             *ngIf="employees && employees.length">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Department</th>
+            <th>DateOfHire</th>
+            <th>IsActive</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees">
+            <td>
+              <a [routerLink]="['/employees', employee.id, 'edit']">
+                {{ employee.name }}
+              </a>
+            </td>
+            <td>{{ employee.role }}</td>
+            <td>{{ employee.department }}</td>
+            <td>{{ employee.dateOfHire }}</td>
+            <td>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="isActiveCheckbox" [checked]="employee.isActive" disabled="disabled">
+                <label class="form-check-label" for="isActiveCheckbox"></label>
+              </div>
+            </td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm"
+                      [routerLink]="['/employees', employee.id, 'edit']">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="errorMessage"
+     class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>

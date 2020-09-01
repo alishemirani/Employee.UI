@@ -1,0 +1,177 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body">
+    <form novalidate
+          #employeeForm="ngForm">
+      <fieldset>
+        <legend>Employee Information</legend>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="employeeNameId">Name</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="employeeNameId"
+                   type="text"
+                   placeholder="Name (required)"
+                   required
+                   minlength="3"
+                   maxlength="150"
+                   [(ngModel)]=Employee.name
+                   name="employeeName"
+                   #employeeNameVar="ngModel"
+                   [ngClass]="{'is-invalid': (employeeNameVar.touched ||
+                                              employeeNameVar.dirty) &&
+                                              !employeeNameVar.valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="employeeNameVar.errors?.required">
+                Employee name is required.
+              </span>
+              <span *ngIf="employeeNameVar.errors?.minlength">
+                Employee name must be at least three characters.
+              </span>
+              <span *ngIf="employeeNameVar.errors?.maxlength">
+                Employee name must be maximum 150 characters.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="employeeRole">Role</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="employeeRole"
+                   type="text"
+                   placeholder="Role"
+                   [(ngModel)]=Employee.role
+                   name="employeeRole"
+                   #employeeRoleVar="ngModel"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="employeeDepartment">Department</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="employeeDepartment"
+                   type="text"
+                   placeholder="Department"
+                   [(ngModel)]=Employee.department
+                   name="employeeDepartment"
+                   #employeeDepartmentVar="ngModel"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="employeeSkillset">Skillset</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="employeeSkillset"
+                   type="text"
+                   placeholder="Skillset"
+                   [(ngModel)]=Employee.skillSets
+                   name="employeeSkillset"
+                   #employeeSkillsetVar="ngModel"/>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="dateOfBirth">Date of birth</label>
+          <div class="col-md-8">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                      name="dateOfBirth"
+                      [(ngModel)]="dateOfBirth"
+                      ngbDatepicker
+                      #d="ngbDatepicker">
+
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="dateOfHire">Date of hire</label>
+          <div class="col-md-8">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                      name="dateOfHire"
+                      [(ngModel)]="dateOfHire"
+                      ngbDatepicker
+                      #c="ngbDatepicker">
+
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="c.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="descriptionId">IsActive</label>
+          <div class="col-md-8">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="isActiveCheckbox" [(ngModel)]="Employee.isActive" [ngModelOptions]="{standalone: true}">
+              <label class="form-check-label" for="isActiveCheckbox"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                 for="descriptionId">Address</label>
+          <div class="col-md-8">
+            <app-address [(address)]="Employee.address"></app-address>
+          </div>
+        </div>
+
+
+      </fieldset>
+    </form>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-4">
+      <button class="btn btn-primary mr-3"
+              style="width:80px"
+              type="button"
+              title="Save your entered data"
+              [disabled]="!isValid()"
+              (click)="saveEmployee()">
+        Save
+      </button>
+      <button class="btn btn-outline-secondary mr-3"
+              style="width:80px"
+              type="button"
+              title="Cancel your edits"
+              [routerLink]="['/employees']">
+        Cancel
+      </button>
+      <button *ngIf="isEditMode"
+              class="btn btn-outline-warning"
+              style="width:80px"
+              type="button"
+              title="Delete this product"
+              (click)="deleteEmployee()">
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <div class='alert alert-danger'
+       *ngIf='errorMessage'>{{errorMessage}}
+  </div>
+</div>

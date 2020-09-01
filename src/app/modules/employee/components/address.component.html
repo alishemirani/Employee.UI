@@ -1,0 +1,63 @@
+<div class="form-group row">
+<label class="col-md-2 col-form-label"
+  for="descriptionId">Address1</label>
+<div class="col-md-10">
+  <input class="form-control"
+  id="address1"
+  type="text"
+  placeholder="Address1"
+  [(ngModel)]=address.address1
+  name="address1"
+  #employeeAddress1Var="ngModel"/>
+</div>
+</div>
+<div class="form-group row">
+  <label class="col-md-2 col-form-label"
+    for="descriptionId">Address2</label>
+  <div class="col-md-10">
+    <input class="form-control"
+    id="address2"
+    type="text"
+    placeholder="Address2"
+    [(ngModel)]=address.address2
+    name="address2"
+    #employeeAddress2Var="ngModel"/>
+  </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label"
+      for="descriptionId">City</label>
+    <div class="col-md-2">
+      <input class="form-control"
+      id="city"
+      type="text"
+      placeholder="City"
+      [(ngModel)]=address.city
+      name="city"
+      #employeeCityVar="ngModel"/>
+    </div>
+    <label class="col-md-2 col-form-label"
+      for="descriptionId">State</label>
+    <div class="col-md-2">
+      <input class="form-control"
+      id="state"
+      type="text"
+      placeholder="State"
+      [(ngModel)]=address.state
+      name="state"
+      #employeeStateVar="ngModel"/>
+    </div>
+    <label class="col-md-2 col-form-label"
+      for="descriptionId">Zip Code</label>
+    <div class="col-md-2">
+      <input class="form-control"
+      id="zipCode"
+      type="text"
+      placeholder="Zip Code"
+      [(ngModel)]="address.zipCode"
+      (ngModelChange)="toNumber()"
+      name="zipCode"
+      #employeeZipCodeVar="ngModel"/>
+    </div>
+    </div>
